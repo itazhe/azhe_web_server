@@ -51,15 +51,15 @@ def web_server(sock_conn):
             html_text = f.read()
         sock_conn.send(html_text)
 
-        else:
-            rsp = ("HTTP/1.1 404 Not Found\r\nContent-Type: text/html; charset=UTF-8\r\nConnection:close\r\n"
-            "Server: azhe server\r\n\r\n")
-            sock_conn.send(rsp.encode())
+    else:
+        rsp = ("HTTP/1.1 404 Not Found\r\nContent-Type: text/html; charset=UTF-8\r\nConnection:close\r\n"
+        "Server: azhe server\r\n\r\n")
+        sock_conn.send(rsp.encode())
 
-            file_path = os.path.join(web_root_path, 404.html)
-            with open(file_path, "rb") as f:
-                html_text = f.read()
-            sock_conn.send(html_text)
+        file_path = os.path.join(web_root_path, "404.html")
+        with open(file_path, "rb") as f:
+            html_text = f.read()
+        sock_conn.send(html_text)
 
     sock_conn.close()
 
