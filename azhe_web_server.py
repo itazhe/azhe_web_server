@@ -17,7 +17,7 @@ def web_server(sock_conn):
 
     path_args = req.split("\r\n")[0].split(" ")[1]
     path_args = urllib.parse.unquote(path_args)   # URL解码
-    path_args.split("?")
+    path_args = path_args.split("?")
     path = path_args[0]
 
     
@@ -27,14 +27,18 @@ def web_server(sock_conn):
         file_ext = path.split("/")[-1].split(".")[-1]   #  文件后缀
         file_path = os.path.join(web_root_path, path[1:])
 
-        if file_ext in ("ico", ):
-            content_type = "image/x-icon"
-        elif file_ext.lower() in ("jpg", "jpeg"):
-            content_type = "image/jpeg"
-        elif file_ext.lower() in ("png", ):
-            content_type = "image/x-icon"
-        elif file_ext.lower() in ("html", "htm"):
-            content_type = "text/html; charset=UTF-8"
+    if file_ext in ("ico", ):
+        content_type = "image/x-icon"
+    elif file_ext.lower() in ("jpg", "jpeg"):
+        content_type = "image/jpeg"
+    elif file_ext.lower() in ("png", ):
+        content_type = "image/x-icon"
+    elif file_ext.lower() in ("html", "htm"):
+        content_type = "text/html; charset=UTF-8"
+    elif file_ext.lower() in ("js", ):
+        content_type = "text/javascript"
+    elif file_ext.lower() in ("css", ):
+        content_type = "text/css"
 
     if os.path.exists(file_path):
         # path = "C:\\Users\\POWER\\Desktop\\test.html"
